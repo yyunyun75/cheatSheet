@@ -1,3 +1,5 @@
+Testing environment: https://kubernetes.io/docs/tutorials/hello-minikube/
+
 Namespace Related
 kubectl get ns //get all the namespace
 kubectl create ns myns //create namespace called myns
