@@ -1,0 +1,8 @@
+Namespace Related
+kubectl get ns //get all the namespace
+kubectl create ns myns //create namespace called myns
+kubectl run nginx --image=nginx --namespace=myns   //create pod called nginx in myns namespace
+kubectl get pods --namespace=myns //get pods under myns namespace
+kubectl config set-context --current --namespace=myns  //make myns the default namespace
+kubectl config view --minify |grep namespace //verify current namespace
+
