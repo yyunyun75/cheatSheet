@@ -1,5 +1,9 @@
 Testing environment: https://kubernetes.io/docs/tutorials/hello-minikube/
 
+Pod related
+aws eks update-kubeconfig --name [cluster name] //set the aws eks clustername 
+kubectl get po -A //get all the pods in current cluster
+
 Namespace Related
 kubectl get ns //get all the namespace
 kubectl create ns myns //create namespace called myns
