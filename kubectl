@@ -28,3 +28,7 @@ kubectl logs pod/[pod Name] //check the log of a pod
 Run related command
 kubectl run -i --tty busybox --image=busybox -- sh //run pod as interctive shell, here --tty opens interactive terminal, first busybox means the name of the pod, double dash means it is t the end of options, there's a space between double dash and sh
 kubectl run -i --tty busybox --image=busybox -- env //create pod and run command env
+kubectl exec -it pod/[pod name] -- sh //running interative command sh inside pod
+kubectl exec -it pod/[pod name] -- /bin/bash //run bash sheell interativly inside pod
+kubectl exec pod/[pod name] -- ls /    //run list command inside pod
+kubectl exec pod/[pod name] -- env     //run env command inside pod
