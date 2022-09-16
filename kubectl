@@ -24,6 +24,13 @@ kubectl apply -f deploy.yaml //this will update the deployment in case it has al
 kubectl get all //check deployment, replica set, pod etc.
 kubectl delete deployment kubernetes-bootcamp //delete deployment and replica set then the pod, the pod deletion takes little longer
 kubectl logs pod/[pod Name] //check the log of a pod
+kubectl scale deployment web-server --replicas=6 //update deployment "web-server" to have 6 replicas
+kubectl rollout history deployment web-server //check the deployment history
+kubectl rollout undo deployment web-server //undo the last deployment
+kubectl edit deployment web-server --record //edit the deployment, keep in history record
+kubectl set image deployment web-server httpd=httpd:2.4.38-alpine --record //change the deployment image
+kubectl expose deployment web-server --type=LoadBalancer --port=80 //expose the deployment "web-server" to the public use load balancer
+watch kubectl get services //get exteranl ip and load in browser
 
 Run related command
 kubectl run -i --tty busybox --image=busybox -- sh //run pod as interctive shell, here --tty opens interactive terminal, first busybox means the name of the pod, double dash means it is t the end of options, there's a space between double dash and sh
@@ -32,3 +39,14 @@ kubectl exec -it pod/[pod name] -- sh //running interative command sh inside pod
 kubectl exec -it pod/[pod name] -- /bin/bash //run bash sheell interativly inside pod
 kubectl exec pod/[pod name] -- ls /    //run list command inside pod
 kubectl exec pod/[pod name] -- env     //run env command inside pod
+
+Labels and annotation
+kubectl get pods -L color,tier. //get pods with color, tier label, command separated no space
+kubectl get pods -L colors,tier -l "colors=green" //get pods with only colors=green
+kubectl get pods -L colors,tier -l "colors=red,tier!=bt" //get pods with colors=red but tier is not bt
+kubectl get pods -L colors,tier -l "colors in (red,green)" //get pods with colors in red, green
+ 
+kubectl describe pod red-frontend | grep Annotations
+ 
+ 
+ 
