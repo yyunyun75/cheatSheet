@@ -25,4 +25,6 @@ kubectl get all //check deployment, replica set, pod etc.
 kubectl delete deployment kubernetes-bootcamp //delete deployment and replica set then the pod, the pod deletion takes little longer
 kubectl logs pod/[pod Name] //check the log of a pod
 
-
+Run related command
+kubectl run -i --tty busybox --image=busybox -- sh //run pod as interctive shell, here --tty opens interactive terminal, first busybox means the name of the pod, double dash means it is t the end of options, there's a space between double dash and sh
+kubectl run -i --tty busybox --image=busybox -- env //create pod and run command env
