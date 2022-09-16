@@ -13,7 +13,7 @@ kubectl config set-context --current --namespace=myns  //make myns the default n
 kubectl config view --minify |grep namespace //verify current namespace
 
 Replica Set (rs.yml)
-kubectl create -f rs.yml //create replica set use file rs.yml
+kubectl create -f rs.yml --save-config //create replica set use file rs.yml
 kubectl get rs //get all the repica set, inlude name called "myapp-rc"
 kubectl delete rs myapp-rc //delete replica set called "myapp-rc"
 
