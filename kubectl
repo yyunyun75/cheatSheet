@@ -49,7 +49,7 @@ kubectl get pods -L colors,tier -l "colors in (red,green)" //get pods with color
  
 kubectl describe pod red-frontend | grep Annotations
 
-cron job
+Job && CronJob
 kubectl create job one-off --image=alpine -- sleep 30 //Create a Job named one-off that sleeps for 30 seconds
 kubectl get jobs one-off -o yaml | more //Read through the spec of the Job to see what other fields can be configured
 
