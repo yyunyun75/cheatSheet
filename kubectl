@@ -61,24 +61,11 @@ apiVersion: batch/v1
 EOF
 kubectl create -f pod-fail.yaml
 
-Create cron job that runs every minute
+Create cron job that runs every minute (cronjob-example.yaml)
 
 cat << 'EOF' > cronjob-example.yaml
 apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: cronjob-example
-spec:
-  schedule: "*/1 * * * *"
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          containers:
-          - image: alpine
-            name: fail
-            command: ['date']
-          restartPolicy: Never
+...
 EOF
 kubectl create -f cronjob-example.yaml
  
