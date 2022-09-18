@@ -10,6 +10,7 @@ kubectl create ns myns //create namespace called myns
 kubectl run nginx --image=nginx --namespace=myns   //create pod called nginx in myns namespace
 kubectl get pods --namespace=myns //get pods under myns namespace
 kubectl config set-context --current --namespace=myns  //make myns the default namespace
+kubectl config get-contexts //get all the contexts
 kubectl config view --minify |grep namespace //verify current namespace
 
 Replica Set (rs.yml)
