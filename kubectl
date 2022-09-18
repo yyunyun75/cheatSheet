@@ -48,6 +48,29 @@ kubectl get pods -L colors,tier -l "colors=red,tier!=bt" //get pods with colors=
 kubectl get pods -L colors,tier -l "colors in (red,green)" //get pods with colors in red, green
  
 kubectl describe pod red-frontend | grep Annotations
- 
- 
+
+cron job
+kubectl create job one-off --image=alpine -- sleep 30 //Create a Job named one-off that sleeps for 30 seconds
+kubectl get jobs one-off -o yaml | more //Read through the spec of the Job to see what other fields can be configured
+
+Create cron job that runs every minute
+
+cat << 'EOF' > cronjob-example.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-example
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: alpine
+            name: fail
+            command: ['date']
+          restartPolicy: Never
+EOF
+kubectl create -f cronjob-example.yaml
  
