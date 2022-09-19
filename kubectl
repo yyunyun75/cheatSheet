@@ -68,4 +68,8 @@ apiVersion: batch/v1
 ...
 EOF
 kubectl create -f cronjob-example.yaml
+
+Logs
+kubectl logs -f --tail=1 --timestamps pod-logs client //-f for follow, meaning stream, --tail for the last line from pod called pod-logs, container client
+
  
