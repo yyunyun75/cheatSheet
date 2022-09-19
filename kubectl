@@ -71,5 +71,7 @@ kubectl create -f cronjob-example.yaml
 
 Logs
 kubectl logs -f --tail=1 --timestamps pod-logs client //-f for follow, meaning stream, --tail for the last line from pod called pod-logs, container client
-
- 
+kubectl create -f pod-webserver.yaml
+kubectl expose pod webserver-logs --type=LoadBalancer //The expose command uses the container port for the Service's port when the --port option isn't provided. In this case, the Service uses port 80 (HTTP)
+kubectl exec webserver-logs -- tail -10 conf/httpd.conf //check the httpd.conf for the last 10 lines on pod called "weberver-logs"
+kubectl cp webserver-logs:conf/httpd.conf local-copy-of-httpd.conf //copy the httpd.conf file from the pod "weberver-logs" to the local machine 
