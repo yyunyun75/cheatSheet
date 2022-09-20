@@ -76,6 +76,9 @@ kubectl expose pod webserver-logs --type=LoadBalancer //The expose command uses 
 kubectl exec webserver-logs -- tail -10 conf/httpd.conf //check the httpd.conf for the last 10 lines on pod called "weberver-logs"
 kubectl cp webserver-logs:conf/httpd.conf local-copy-of-httpd.conf //copy the httpd.conf file from the pod "weberver-logs" to the local machine 
 kubectl exec kube-proxy-f8dl7 --namespace=kube-system -- tail -10 /etc/mtab //tail last 10 lines fo file /etc/mtab of the pod kube-proxy...
+kubectl get events -n default
+kubectl top //use the top command to monitor node and Pod resource utilization
+kubectl top pods -n kube-system
 
 s3 bucket related
 s3_bucket=$(aws s3api list-buckets --query "Buckets[].Name" --output table | grep logs | tr -d \|)//get s3bucket name stored in a variable, here command tr, which with the -d will delete characters that are specified. tr stands for translate
