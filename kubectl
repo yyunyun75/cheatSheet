@@ -83,6 +83,7 @@ kubectl top pods -n kube-system
 s3 bucket related
 s3_bucket=$(aws s3api list-buckets --query "Buckets[].Name" --output table | grep logs | tr -d \|)//get s3bucket name stored in a variable, here command tr, which with the -d will delete characters that are specified. tr stands for translate
 
-
+Misc
+kubectl describe nodes | grep --after-context=5 "Non-terminated Pods" //describe nodes show 5 lines after keyword "Non...", can also be written as "grep -A 5"
 
 
