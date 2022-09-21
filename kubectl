@@ -21,7 +21,7 @@ kubectl delete rs myapp-rc //delete replica set called "myapp-rc"
 Deployment
 kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --dry-run=client -o yaml>deploy.yaml //dry-run set as client creates the deployment file but don't run
 cat deploy.yaml //check the content of the yaml
-kubectl apply -f deploy.yaml //this will update the deployment in case it has already been created
+kubectl apply -f deploy.yaml //this will update the deployment in case it has already been created, kubectl apply --force -f load.yaml
 kubectl get all //check deployment, replica set, pod etc.
 kubectl delete deployment kubernetes-bootcamp //delete deployment and replica set then the pod, the pod deletion takes little longer
 kubectl logs pod/[pod Name] //check the log of a pod
