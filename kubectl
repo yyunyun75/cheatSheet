@@ -89,7 +89,7 @@ pod-priviledged.yaml, makes the privildged true, gives you access to all the hos
 pod-runas.yaml, set security access, log in as user 2000, try "ps" can see the process
 kubectl exec security-context-test-3 -it -- /bin/sh  //run the pod security-context-test-3 interactively and run sh
 
-One line to ge to the pod and insert line in mongodb
+One line to ge to the pod and insert line in mongodb and query
 kubectl exec db -it -- mongo testdb --quiet --eval \
   'db.messages.insert({"message": "I was here"}); db.messages.findOne().message'
 
