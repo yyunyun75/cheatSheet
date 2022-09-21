@@ -93,3 +93,5 @@ One line to ge to the pod and insert line in mongodb and query
 kubectl exec db -it -- mongo testdb --quiet --eval \
   'db.messages.insert({"message": "I was here"}); db.messages.findOne().message'
 
+query from mongodb called testdb
+kubectl exec db -it -- mongo testdb --quiet --eval 'db.messages.findOne().message'
