@@ -69,6 +69,11 @@ apiVersion: batch/v1
 EOF
 kubectl create -f cronjob-example.yaml
 
+Service account
+kubectl create serviceaccount app-sa //create service account called app-sa
+kubectl create sa app-sa //here sa is short for serviceaccount
+kubectl run default-pod --image=mongo:4.0.6 --serviceaccount=app-sa --dry-run=client -o yaml > default-pod.yaml //create default-pod.yaml with image and service account specified
+
 Logs
 kubectl logs -f --tail=1 --timestamps pod-logs client //-f for follow, meaning stream, --tail for the last line from pod called pod-logs, container client
 kubectl create -f pod-webserver.yaml
