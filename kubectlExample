@@ -8,3 +8,51 @@ kubectl run mysql-client-loop --image=mysql:5.7 -i -t --rm --restart=Never --\
   bash -ic "while sleep 1; do /usr/bin/mysql -h mysql-read -e 'SELECT @@server_id'; done"
   
  Here bash "-ic", i means interactive, c means read commands from. --rm ensures the Pod is deleted when the shell exits.If you don't specify --restart=Never, a Deploment will be created instead 
+
+1. In your SSH shell, enter the following to create a cluster role binding for the kubernetes-dashboard service account:
+
+cat << EOF > dashboard-admin.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dashboard-admin
+  namespace: kubernetes-dashboard
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dashboard-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: dashboard-admin
+  namespace: kubernetes-dashboard
+EOF
+The roleRef reference the cluster-admin role and the subjects to bind the role to is the kubernetes-dashboard ServiceAccount.
+
+2. Enter the following to create the cluster role binding:
+
+kubectl delete -f dashboard-admin.yaml # delete the default role binding
+kubectl create -f dashboard-admin.yaml
+
+3. Enter the following to create a token for the kubernetes dashboard service account which you will need to sign in to the dashboard later:
+
+kubectl -n kubernetes-dashboard create token dashboard-admin
+
+4. Run a Kubernetes proxy server on the bastion in order to proxy requests to the control plane node from outside the private subnet:
+
+sudo kubectl port-forward -n kubernetes-dashboard --address 0.0.0.0 service/kubernetes-dashboard 8001:443
+
+5. Return to the EC2 Console and copy the Public IP of the bastion-host instance.
+
+6. Open a new browser tab, type https:// and paste the public IP of the bastion host, and append :8001 onto the end of the public IP in the address bar to open the Kubernetes Dashboard for the cluster:
+
+7. Allow your browser to view the website. in recent versions of Chrome, you can do so by typing thisisunsafe
+The dashboard asks you for a method to authenticate, you will use the token you output before a token to sign in.
+
+8. Copy the token you output earlier at the step number 3 (in the web terminal, you only need to highlight the token and it is automatically copied to your clipboard) and paste it onto the Enter token line and click Sign in.
+
+ 
