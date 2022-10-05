@@ -41,7 +41,7 @@ kubectl exec -it pod/[pod name] -- /bin/bash //run bash sheell interativly insid
 kubectl exec pod/[pod name] -- ls /    //run list command inside pod
 kubectl exec pod/[pod name] -- env     //run env command inside pod
 
-Labels and annotation
+Labels and annotation (-l is used for filtering, filter can use !=, =/== for equality-based or in, notin, exists for set-based
 kubectl get pods -L color,tier. //get pods with color, tier label, command separated no space
 kubectl get pods -L colors,tier -l "colors=green" //get pods with only colors=green
 kubectl get pods -L colors,tier -l "colors=red,tier!=bt" //get pods with colors=red but tier is not bt
