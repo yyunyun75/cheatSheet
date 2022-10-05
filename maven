@@ -4,3 +4,6 @@ mvn dependency: tree //run the command where pom.xml is this will give you the d
 mvn dependency: tree -Dverbose //gives more detail
 mvn dependency:tree -Dverbose -Dincludes=com.google.guava:guava //check a particular library
 mvn verify //check mvn dpendency
+
+Run a given profile for application in intelliji
+In intelliji, VM options: -Dspring.profiles.active=dev
