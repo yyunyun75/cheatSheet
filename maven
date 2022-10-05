@@ -3,3 +3,4 @@ https://maven.apache.org/plugins/maven-dependency-plugin/
 mvn dependency: tree //run the command where pom.xml is this will give you the dependency structure
 mvn dependency: tree -Dverbose //gives more detail
 mvn dependency:tree -Dverbose -Dincludes=com.google.guava:guava //check a particular library
+mvn verify //check mvn dpendency
