@@ -76,6 +76,7 @@ kubectl run default-pod --image=mongo:4.0.6 --serviceaccount=app-sa --dry-run=cl
 
 Logs
 kubectl logs -f --tail=1 --timestamps pod-logs client //-f for follow, meaning stream, --tail for the last line from pod called pod-logs, container client
+kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME} //If your container has previously crashed, you can access the previous container’s crash log with
 kubectl create -f pod-webserver.yaml
 kubectl expose pod webserver-logs --type=LoadBalancer //The expose command uses the container port for the Service's port when the --port option isn't provided. In this case, the Service uses port 80 (HTTP)
 kubectl exec webserver-logs -- tail -10 conf/httpd.conf //check the httpd.conf for the last 10 lines on pod called "weberver-logs"
