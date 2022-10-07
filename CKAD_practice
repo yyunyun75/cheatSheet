@@ -5,3 +5,5 @@ kubectl top pods
 kubectl create secret generic xh8jqk7z \
 > --from-literal=key=tkn \
 > --from-literal=value=hy8szK2iu
+
+kubectl run server --image=httpd:2.4.39-alpine --dry-run=client -o yaml>pod.yaml
