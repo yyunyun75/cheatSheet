@@ -1,0 +1,3 @@
+#Alias
+alias cls=clear
+alias kga="kubectl get all"
