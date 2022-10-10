@@ -1,7 +1,7 @@
 vi ~/.bashrc
 
 #Alias
-alias cls=clear
+alias cls=clear //CRTRL+L
 alias kga="kubectl get all"
 
 alias kx='f() {["$1"] && kubectl config use-context $1 || kubectl config current-context;}; f'
