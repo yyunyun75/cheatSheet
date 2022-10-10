@@ -6,3 +6,9 @@ alias kga="kubectl get all"
 
 alias kx='f() {["$1"] && kubectl config use-context $1 || kubectl config current-context;}; f'
 alias kn='f() {["$1"] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace|current-context}; f'
+
+#exports
+export do="--dry-run=client -o yaml"
+export kfc="kubectl apply -f"
+export now="--force --grace-period=0"
+export krr="kubectl run remote-run --image=busybox --restart=Never --rm -it --"
