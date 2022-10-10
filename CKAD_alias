@@ -12,3 +12,8 @@ export do="--dry-run=client -o yaml"
 export kfc="kubectl apply -f"
 export now="--force --grace-period=0"
 export krr="kubectl run remote-run --image=busybox --restart=Never --rm -it --"
+
+example of using
+kubectl create deploy my-deploy --image=nginx --replicas= --port=80 $do > my-deploy.yaml
+$kfc my-deploy.yml
+$krr wget -qO: 8080
