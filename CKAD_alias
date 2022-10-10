@@ -31,3 +31,14 @@ https://github.com/kubernetes
 https://kubernetes.io/blog
 
 For mac user, it is possible to use Vivaldi browser
+
+Kubernetes short names
+ns - namesapces
+po - pods
+sa - serviceaccounts
+svc - services
+deploy - deployments
+ing -ingress
+netpol - networkpolicies
+pv -persistentvolumes
+pvc -persistentvolumeclaims
