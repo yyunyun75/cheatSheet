@@ -22,3 +22,10 @@ $krr wget -qO: 8080
 set expandtab
 set tabspan=2
 set shiftwidth=2
+
+
+Openbook dexam, can access
+https://helm.sh/docs
+https://kubernetes.io/docs
+https://github.com/kubernetes
+https://kubernetes.io/blog
