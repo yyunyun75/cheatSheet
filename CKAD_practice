@@ -14,3 +14,4 @@ where
 selector:
   app: site
 
+grep -i [keyword,case insensitive] -A [num of lines after  lines of trailing context after matching lines.]
