@@ -15,3 +15,6 @@ selector:
   app: site
 
 grep -i [keyword,case insensitive] -A [num of lines after  lines of trailing context after matching lines.]
+
+kubectl logs -n microservice app counter --tail 10  //last 10 lines
+kubectl logs -n microservice app poller -f   //stream realtime
