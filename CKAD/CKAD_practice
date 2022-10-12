@@ -1,3 +1,5 @@
+Info get from various cloudacademy exercise
+
 kubectl create deployment chk1 --image=nginx:1.15.12-alpine --replicas=3 --dry-run=client -o yaml> deploy.yaml
 
 kubectl top pods
