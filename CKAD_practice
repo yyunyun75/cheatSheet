@@ -18,3 +18,5 @@ grep -i [keyword,case insensitive] -A [num of lines after  lines of trailing con
 
 kubectl logs -n microservice app counter --tail 10  //last 10 lines
 kubectl logs -n microservice app poller -f   //stream realtime
+
+k exec pod/secret-pod -- printenv SECRET-ENV-USER //print environment that is set use secret in a pod called secret-pod, you can also run "env" to see all the environment variable
