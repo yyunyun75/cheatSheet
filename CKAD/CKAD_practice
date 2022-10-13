@@ -25,3 +25,6 @@ k exec pod/secret-pod -- printenv SECRET-ENV-USER //print environment that is se
 
 command: [ "/bin/sh", "-c", "env" ]
 https://stackoverflow.com/questions/3985193/what-is-bin-sh-c
+
+
+k get ep //get endpoint for service
