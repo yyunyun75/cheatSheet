@@ -28,3 +28,5 @@ https://stackoverflow.com/questions/3985193/what-is-bin-sh-c
 
 
 k get ep //get endpoint for service
+
+https://octant.dev/ //UI tool for kubernetes
