@@ -2,7 +2,7 @@ Info get from various cloudacademy exercise
 
 kubectl create deployment chk1 --image=nginx:1.15.12-alpine --replicas=3 --dry-run=client -o yaml> deploy.yaml
 
-kubectl top pods
+kubectl top pods -A --sort-by='cpu' //-A, all namespace, k top pods -h, ask for help
 
 kubectl create secret generic backend-user --from-literal=backend-username='backend-admin'
 
