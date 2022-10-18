@@ -32,3 +32,18 @@ k get ep //get endpoint for service
 https://octant.dev/ //UI tool for kubernetes
 
 kubectl get pods [podName] -o jsonpath={.status.hostIP} //get hostip of a pod using jsonpath
+
+Multi-container design patterns
+1. Sidecar pattern
+
+An extra container in your pod to enhance or extend the functionality of the main container.
+
+2. Ambassador pattern
+
+A container that proxy the network connection to the main container.
+
+3. Adapter pattern
+
+A container that transform output of the main container.
+
+This is taken from the original article from 2015: Patterns for Composite Containers
