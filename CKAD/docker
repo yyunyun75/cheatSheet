@@ -29,6 +29,6 @@ EXPOSE 5000
 CMD [ "python", "src/app.py" ]
 
 
-docker build -t flask-content-advisor:latest .  //build image from the current directory
+docker build -t flask-content-advisor:latest .  //build image from the current directory, -t tells docker to tag image with name flask...
 
 curl ipecho.net/plain; echo   //curl VM's public ip
