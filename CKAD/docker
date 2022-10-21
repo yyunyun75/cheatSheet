@@ -3,3 +3,4 @@ docker run --name web-server -d -p 8080:80 nginx:1.12  //--name, label the conta
 curl localhost:8080 //previous command set host port 8080 and container port 80
 docker ps //list all running containers
 docker ps -a //list all running and stopped containers
+docker stop web-server //stop the web-server container
