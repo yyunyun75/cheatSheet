@@ -8,3 +8,4 @@ docker start web-server //starts the web-server container
 docker logs web-server //see the container log
 docker exec -it web-server /bin/bash //run commands in running container
 docker exec web-server ls /etc/nginx //run ls command and returns to the ssh shell prompt without ssh tot he container
+docker search "Microsoft .NET Core" //search .net image
