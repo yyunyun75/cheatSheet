@@ -4,3 +4,6 @@ curl localhost:8080 //previous command set host port 8080 and container port 80
 docker ps //list all running containers
 docker ps -a //list all running and stopped containers
 docker stop web-server //stop the web-server container
+docker start web-server //starts the web-server container
+docker logs web-server //see the container log
+docker exec -it web-server /bin/bash //run commands in running container
