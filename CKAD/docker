@@ -27,3 +27,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 # Set the default command to run the app
 CMD [ "python", "src/app.py" ]
+
+
+docker build -t flask-content-advisor:latest .  //build image from the current directory
+
+curl ipecho.net/plain; echo   //curl VM's public ip
