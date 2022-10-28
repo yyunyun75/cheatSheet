@@ -1,3 +1,6 @@
 https://curl.se/docs/manpage.html#-m
 curl -m //Maximum time in seconds that you allow each transfer to take
 k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 10.12.2.15 //run pod use image nginx then curl the ip
+
+Wget is a networking command-line tool that lets you download files and interact with REST APIs. It supports the HTTP,HTTPS, FTP, and FTPS internet protocols. Wget can deal with unstable and slow network connections. In the event of a download failure, Wget keeps trying until the entire file has been retrieved.
+k run tmp --restart=Never --rm --image=busybox -i -- wget -O- 10.12.2.15 //similar as above command, -o suppose for output name
