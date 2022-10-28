@@ -1,0 +1,3 @@
+https://curl.se/docs/manpage.html#-m
+curl -m //Maximum time in seconds that you allow each transfer to take
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 10.12.2.15 //run pod use image nginx then curl the ip
