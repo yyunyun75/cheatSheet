@@ -4,3 +4,4 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 10.12.2.15 /
 
 Wget is a networking command-line tool that lets you download files and interact with REST APIs. It supports the HTTP,HTTPS, FTP, and FTPS internet protocols. Wget can deal with unstable and slow network connections. In the event of a download failure, Wget keeps trying until the entire file has been retrieved.
 k run tmp --restart=Never --rm --image=busybox -i -- wget -O- 10.12.2.15 //similar as above command, -O suppose for output name, -O-, means writing to stdout
+wget -q -O - "http://wordpress.org/latest.tar.gz" //will quietly ( flag -q) download and output the latest WordPress version to stdout ( flag -O -)
