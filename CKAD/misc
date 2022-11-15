@@ -8,3 +8,5 @@ wget -q -O - "http://wordpress.org/latest.tar.gz" //will quietly ( flag -q) down
 
 Difference between tail -f vs tail -F: basically -F takes care of log file rotation(deleted or moved) in some system
 https://unix.stackexchange.com/questions/291932/what-is-the-difference-between-tail-f-and-tail-f
+
+tail -n +1: skip the first line
