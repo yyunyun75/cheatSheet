@@ -1,0 +1,2 @@
+To use a volume, specify the volumes to provide for the Pod in .spec.volumes 
+and declare where to mount those volumes into containers in .spec.containers[*].volumeMounts.
