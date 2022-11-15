@@ -10,3 +10,4 @@ Difference between tail -f vs tail -F: basically -F takes care of log file rotat
 https://unix.stackexchange.com/questions/291932/what-is-the-difference-between-tail-f-and-tail-f
 
 tail -n +2 skips the first line
+tail -n +K, skip the first n - K line from first and list all remaining lines
