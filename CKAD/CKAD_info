@@ -46,3 +46,4 @@ pv -persistentvolumes
 pvc -persistentvolumeclaims
 ev -events
 quota - resourcequotas
+ep - endpoints
