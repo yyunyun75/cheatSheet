@@ -47,3 +47,4 @@ pvc -persistentvolumeclaims
 ev -events
 quota - resourcequotas
 ep - endpoints
+cm - configmap
