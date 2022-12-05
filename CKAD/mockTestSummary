@@ -19,3 +19,7 @@ press j to select multiple lines
 press $ to the end of line
 press > to indent one time
 press . to repeat multiple times if needed
+
+// JOB related
+k create job -h
+k create job [jobName] --image=busybox:1.31.0 $do > /opt/course/3/job.yaml -- sh -c "sleep 2 && echo done"
