@@ -46,3 +46,6 @@ helm repo update //update charts
 helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2 // install release name internal... from char bitnami/pache, replica 2
 helm show values bitnami/apache # will show a long list of all possible value-settings
 
+//Label & annotation, multiple pods
+k -n sun annotate pod -l protected=true protected="do not delete this pod" //add annotation for label protected=true
+k -n sun label pod -l "type in (worker,runner)" protected=true //add label for pods with label worker/runner
