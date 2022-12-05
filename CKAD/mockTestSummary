@@ -10,3 +10,12 @@ spec:
     image: busybox:1.28
     args: [/bin/sh, -c,
             'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
+
+initContainer
+
+indent multiple lines in vi:
+press v to visual mode
+press j to select multiple lines
+press $ to the end of line
+press > to indent one time
+press . to repeat multiple times if needed
