@@ -17,6 +17,7 @@ example of using
 kubectl create deploy my-deploy --image=nginx --replicas= --port=80 $do > my-deploy.yaml
 $kfc my-deploy.yml
 $krr wget -qO: 8080
+$krr wget -O- serviceName:port
 
 
 set expandtab
@@ -54,3 +55,24 @@ Delete multiple blank lines in vi
 :g/^$/d
 Delete a range of lines
 :[start],[end]d. -> :3,5d
+
+in yaml defination where command is used, you can use:
+containers:
+- command:
+  - sh
+  - -c
+  - cat /tmp/ready
+  
+or
+- command: ["/bin/sh"]
+  args: ["-c", "cat /tmp/ready"]
+  
+in yaml, the use of dash is to group properties as object
+env:
+    - name: POSTGRES_PASSWORD
+      value: mysecretpassword
+    - name: POSTGRES_USER
+      value: root
+      
+ will be treated as:
+ env: [{name:POSTGRES_PASSWORD, value:mysecretpassword}, {name:POSTGRES_USER, value:root}]
