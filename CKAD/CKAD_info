@@ -52,3 +52,5 @@ cm - configmap
 
 Delete multiple blank lines in vi
 :g/^$/d
+Delete a range of lines
+:[start],[end]d. -> :3,5d
