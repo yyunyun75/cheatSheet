@@ -48,3 +48,7 @@ ev -events
 quota - resourcequotas
 ep - endpoints
 cm - configmap
+
+
+Delete multiple blank lines in vi
+:g/^$/d
