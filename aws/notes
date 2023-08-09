@@ -102,3 +102,108 @@ Enable Object lock, versioning, MFE delete
 ...
 
 
+aws s3api put-object --key public01.txt \
+--body public-access-acl.txt \
+--acl public-read --content-type text/plain \
+--bucket s3-security-workshop-0edb3d40b71b
+
+https://s3-security-workshop-0edb3d40b71b.s3.amazonaws.com/public01.txt
+
+aws s3api put-object --key private01.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b  
+
+aws s3api put-object --key public02.txt --body public-access-acl.txt --acl public-read --bucket s3-security-workshop-0edb3d40b71b
+The above means change the content of key public02.txt with public-access-acl.txt, also make the meta data change for public read
+
+aws s3api put-object --key public-access-acl-01.txt --body public-access-acl.txt --acl public-read --bucket s3-security-workshop-0edb3d40b71b
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicAccess",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": ["s3:GetObject"],
+            "Resource": "arn:aws:s3:::s3-security-workshop-0edb3d40b71b/public/*"
+        }
+    ]
+}
+
+aws s3api put-object --key public/public-access-policy.txt \
+--body public-access-policy.txt \
+--content-type text/plain \
+--bucket s3-security-workshop-0edb3d40b71b
+
+
+cat ~/.aws/config
+
+# Run a command as S3Sec-IdentityRole
+aws sts get-caller-identity --profile identity
+
+# Run a command as S3Sec-ResourceRole
+aws sts get-caller-identity --profile resource
+
+aws s3api put-object --key identity01.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b --profile identity
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": ["s3:GetObject", "s3:PutObject"],
+            "Resource": "arn:aws:s3:::s3-security-workshop-0edb3d40b71b/identity/*"
+        }
+    ]
+}
+
+aws s3api put-object --key identity/identity01.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b --profile identity
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ResourcePolicyReadWrite",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::488873538668:role/S3Sec-ResourceRole-0edb3d40b71b"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::s3-security-workshop-0edb3d40b71b/resource/*"
+            ]
+        }
+    ]
+}
+
+aws s3api put-object --key resource/resource01.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b --profile resource
+
+
+KMS key Key ID: 8e34ba0e-e9e9-4796-a24b-86c9ec5a2f50
+arn:aws:kms:us-east-1:488873538668:key/8e34ba0e-e9e9-4796-a24b-86c9ec5a2f50
+
+aws s3api put-object --key encryption/sse-s3.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b
+
+aws s3api head-object --key encryption/sse-s3.txt --bucket s3-security-workshop-0edb3d40b71b --query 'ServerSideEncryption'
+
+aws s3api put-object --key encryption/sse-kms.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b
+
+aws s3api put-object --key identity/sse-kms.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b --profile identity
+
+aws s3api put-object --key identity/sse-kms.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b --profile identity
+
+aws s3api put-object --key resource/sse-kms.txt --body textfile --bucket s3-security-workshop-0edb3d40b71b --profile resource
+
+
+Module 3 -> Grant Access to KMS
+
+
+
+
