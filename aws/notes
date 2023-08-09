@@ -206,4 +206,10 @@ Module 3 -> Grant Access to KMS
 
 
 
+What do customers need to protect againist?
+
+Human error - S3 versioning
+Malicious activity : object lock, cross account replication
+Regional disrutptions: S3 cross region replication, s3 multi-region access points
+
 
