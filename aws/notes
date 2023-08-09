@@ -1,5 +1,22 @@
 Amazon S3 Security Best Practices
-
+08/09/2023
 Anthony Fiore
 Sr Storage Specialist SA
+
+S3 Storage Classes
+S3 intelligent-Tiering (gradually goes down cold side if not used)
+Standard
+Standard IA  -> api cost doubles, storage cost down
+Glacier Instant Retrieval
+
+Need to restore first:
+Glacier Flesible Retrieval
+Glacier Deep Archive (24 - 48 hours)
+
+
+Lifecycle objects, use that 
+
+Option 1, use S3 intelligent-Tiering
+Option 2, some app does not suppors it, try to use lifecycle objects mode yourself
+Option 3, fixed need then pick the classes fits your need
 
