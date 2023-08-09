@@ -22,3 +22,83 @@ Option 2, some app does not suppors it, try to use lifecycle objects mode yourse
 Option 3, fixed need then pick the classes fits your need
 
 Api actions -> Cloud trail, track changes...
+
+AWS Identity & Access Management Overview
+Identities
+1. IAM user policy, policy targeted for user
+2. S3 Bucket Policy, policy targeted for s3
+
+Actions
+
+Resources
+
+Conditions
+
+Access Policy
+Effect (allow/deny)
+Principal (arn)
+Action
+Resource
+Condition
+
+S3 Access Control Lists(ACLs) -> not used anymore
+use Bucket Policy instead
+
+
+S3 Access Points
+Simplifed control for shared buckets accessed by many teams
+use cases -> decentrallized 
+Segment client into distinct groups
+Each group gets their own Access Point (there's limits on number of Access Point,10,000 per account per region, no cost on access point)
+Apply a poliy to each Access Point (use prefix)
+Maintain centralized control over storage
+
+Boundary enforcement
+Amazon s3 vpc endpoint policy
+Aws organ service control policy (SCP)
+Amazon s3 block public access
+
+Amazon S3 virtual private cloud endpoint(VPCE)
+Access Amazon S3 through privat network(VPC), Restrice Access to s3 from outside VPC
+It is region specific, not possible for cross region access, use vpc nat gateway endpoint
+
+What is public access?
+{
+"princial":"*",
+...
+}
+
+Can be done on Account-level(preferred) or Bucket-level
+
+S3-Server-side encryption
+SSE-S3 (object keys encrypted by s3 managed master key)
+SSE-KMS (enable bucket keys)
+SSE-C (key must be presented in put/get requests, key is not stored by AWS, not recommended)
+
+SSE-S3 is enabled by default now
+
+Incoming objects to S3, then trigger one of the services:
+SQS (msg)
+SNS (msg)
+Lambda (trigger)
+EventBridge (event) eventBridge, can trigger multiple parrael work flows.
+
+Monitoring 3s -logging
+S3 Server Access Logs (best effort, may have more detail)
+AWS cloudTrail object-level logging (guaranteed)
+
+S3 storage Lens
+A storage analytics service that provides organization wide visibly into storage...
+Cross account access
+
+
+
+S3 best practices
+Acct block public access: eanble
+bucket default encryption: SSE-S3 or SSE-KMS
+by bucket poligy, require TLS
+VPC endpoint: enable and require
+Enable Object lock, versioning, MFE delete
+...
+
+
