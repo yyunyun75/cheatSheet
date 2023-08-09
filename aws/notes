@@ -215,7 +215,7 @@ Regional disrutptions: S3 cross region replication, s3 multi-region access point
 Highly resilient and durable by default (by default 3 AZ same region)
 
 Amazon S3 Object Lock
-Enforce write once ready many (WORM) policies
+Enforce write once read many (WORM) policies
 Meet compliance and regulatory requirements
 integration with other features: Versioning, lifecycle, replication, batch replication,storage lens
 
@@ -226,6 +226,16 @@ replicate to a bucket with tetnetion controls in the same or edifferent aws regi
 replicate faster to a different aws region, backed by an sla + replication metrics
 Bio directional replication int same region or different
 
-
+Select data
+1. Replicate the entrie bucket
+2. limit the scope of replication
+Retain metadata
+1. version ids
+2. object lock settings
+Change ownership
+Automatically change ownership of replicas to a different aws account
+cost optiomiation
+1. replicate to different storage classes
+2. use lifecycelat the destination
 
 
