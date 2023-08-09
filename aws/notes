@@ -237,5 +237,14 @@ Automatically change ownership of replicas to a different aws account
 cost optiomiation
 1. replicate to different storage classes
 2. use lifecycelat the destination
+Multi-Region Access Points
+unique global hostname to access bucket in multiple regions
+app operate across multiple regions
+requests are accelerated 
+
+aws s3api list-buckets --query "Buckets[].Name"  //list buckets
+
+Account: 349036382409
+name: dp-workshop-module-5-partner-bucket-45732
 
 
