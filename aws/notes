@@ -212,4 +212,7 @@ Human error - S3 versioning
 Malicious activity : object lock, cross account replication
 Regional disrutptions: S3 cross region replication, s3 multi-region access points
 
+Highly resilient and durable by default (by default 3 AZ same region)
+
+
 
