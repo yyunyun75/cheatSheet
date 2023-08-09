@@ -243,6 +243,7 @@ app operate across multiple regions
 requests are accelerated 
 
 aws s3api list-buckets --query "Buckets[].Name"  //list buckets
+module1_bucket=$(aws s3api list-buckets --query "Buckets[].Name" | jq -r '.[]|select(. | startswith("dp-workshop-module-1"))')
 
 Account: 349036382409
 name: dp-workshop-module-5-partner-bucket-45732
@@ -250,4 +251,13 @@ name: dp-workshop-module-5-partner-bucket-45732
 Accountr: 914398032057
 name: dp-workshop-module-5-partner-bucket-d7abe
 
+[cloudshell-user@ip-10-2-70-95 ~]$ aws sts get-caller-identity | jq -r .Arn
+arn:aws:sts::349036382409:assumed-role/WSParticipantRole/Participant
+[cloudshell-user@ip-10-2-70-95 ~]$ aws s3api list-buckets --query "Buckets[].Name" | jq -r '.[]|select(. | startswith("dp-workshop-module-5-partner-bucket"))'
+dp-workshop-module-5-partner-bucket-45732
+[cloudshell-user@ip-10-2-70-95 ~]$ aws s3api list-buckets --query "Buckets[].Name" | jq -r '.[]|select(. | startswith("dp-workshop-module-5-my-bucket"))'
+dp-workshop-module-5-my-bucket-a8307
+[cloudshell-user@ip-10-2-70-95 ~]$ aws s3control list-multi-region-access-points --account-id `(aws sts get-caller-identity | jq -r '.Account')` \
+> | jq -r '.AccessPoints[0] | "\(.Name)      \(.Alias)"'
+mrap-1      msanrnwheunf5.mrap
 
