@@ -4,13 +4,14 @@ Anthony Fiore
 Sr Storage Specialist SA
 
 S3 Storage Classes
-S3 intelligent-Tiering (gradually goes down cold side if not used)
+S3 intelligent-Tiering (gradually goes down cold side if not used) 
+  Frequent Accces Tier->30 days later -> Infrequent Access Tier->60days laterArchive Access Tier->90days later Deep Archive Access Tier
 Standard
 Standard IA  -> api cost doubles, storage cost down
 Glacier Instant Retrieval
 
 Need to restore first:
-Glacier Flesible Retrieval
+Glacier Flexsible Retrieval
 Glacier Deep Archive (24 - 48 hours)
 
 
@@ -20,3 +21,4 @@ Option 1, use S3 intelligent-Tiering
 Option 2, some app does not suppors it, try to use lifecycle objects mode yourself
 Option 3, fixed need then pick the classes fits your need
 
+Api actions -> Cloud trail, track changes...
