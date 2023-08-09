@@ -247,4 +247,7 @@ aws s3api list-buckets --query "Buckets[].Name"  //list buckets
 Account: 349036382409
 name: dp-workshop-module-5-partner-bucket-45732
 
+Accountr: 914398032057
+name: dp-workshop-module-5-partner-bucket-d7abe
+
 
