@@ -261,3 +261,4 @@ dp-workshop-module-5-my-bucket-a8307
 > | jq -r '.AccessPoints[0] | "\(.Name)      \(.Alias)"'
 mrap-1      msanrnwheunf5.mrap
 
+https://catalog.us-east-1.prod.workshops.aws/join?access-code=6636-030c97-aa
