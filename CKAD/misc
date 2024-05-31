@@ -12,19 +12,3 @@ https://unix.stackexchange.com/questions/291932/what-is-the-difference-between-t
 tail -n +2 skips the first line
 tail -n +K, skip the first n - K line from first and list all remaining lines
 
-d795f-49102
-0d129-fd97b
-83158-8dcec
-7a5c5-a0a47
-768b4-20a47
-3a034-fc8c0
-be082-363f6
-13c43-c68d9
-cb481-ce6a3
-fe79f-168dc
-72b2b-b82ee
-8004e-40cbe
-04bf3-87305
-6a092-27b07
-aa924-488bd
-60a74-74dc8
