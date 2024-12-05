@@ -1,0 +1,304 @@
+https://campus.datacamp.com/courses/introduction-to-deep-learning-with-pytorch/introduction-to-pytorch-a-deep-learning-library?ex=1
+
+pip install torch
+
+# Import PyTorch
+import torch
+temperatures = [[72, 75, 78], [70, 73, 76]]
+
+# Create a tensor from temperatures
+temp_tensor = torch.tensor(temperatures)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+temperatures = torch.tensor([[72, 75, 78], [70, 73, 76]])
+adjustment = torch.tensor([[2, 2, 2], [2, 2, 2]])
+
+# Check the shape of the temperatures tensor
+temp_shape = temperatures.shape
+print("Shape of temperatures:", temp_shape)
+
+# Check the type of the temperatures tensor
+temp_type = temperatures.dtype
+print("Data type of temperatures:", temp_type)
+
+# Adjust the temperatures by adding the adjustment tensor
+corrected_temperatures = temperatures+adjustment
+
+print("Corrected temperatures:", corrected_temperatures)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+import torch.nn as nn
+
+input_tensor = torch.tensor([[0.3, 0.4, -0.2]])
+linear_layer = nn.Linear(in_features=3, out_features=2)  -> linear_layer takes an input and provide an output
+output = linear_layer(input_tensor)
+
+linear layer property
+linear_layer.weight
+linear_layer.bias
+
+y0 = W0*X + b0 (W0->weights, b0->bias)
+
+Create a network with 3 linear layers
+model = nn.Sequential(nn.Linear(10,18), nn.Linear(18,20), nn.Linear(20,5))
+
+output_tensor = model(input_tensor) -> output_tensor now has size of 5
+--------------------------------------------------------------------------------------------------------------------------------------
+
+import torch
+import torch.nn as nn
+
+input_tensor = torch.Tensor([[2, 3, 6, 7, 9, 3, 2, 1]])
+
+# Implement a small neural network with two linear layers
+model = nn.Sequential(nn.Linear(8,4),
+                      nn.Linear(4,1)
+                     )
+
+output = model(input_tensor)
+print(output)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+activacation function
+sigmoid function -> binary function
+
+import torch
+import torch.nn as nn
+
+input_tensor = torch.tensor([[6.0]])
+sigmoid = nn.Sigmoid()
+output = sigmoid(input_tensor)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+model = nn.Sequential(
+	nn.Linear(6,4),
+	nn.Linear(4,1),
+	nn.Sigmoid()
+)
+Sigmoldif or Binary classifiction problems
+
+Softmax for multi-class calssification
+Takes N-element vector as input and outputs vector of same size
+outputs a probability distribution: each element is a probability(between 0 and 1), the sum of the output vector is equal to 1
+
+The sigmoid and softmax functions
+
+The sigmoid and softmax functions are two of the most popular activation functions in deep learning. 
+They are both usually used as the last step of a neural network. Sigmoid functions are used for binary classification problems, 
+whereas softmax functions are often used for multiclass classification problems. 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Building a binary classifier in PyTorch
+
+Recall that a small neural network with a single linear layer followed by a sigmoid function is a binary classifier. It acts just like a logistic regression.
+
+In this exercise, you'll practice building this small network and interpreting the output of the classifier.
+
+The torch package and the torch.nn package have already been imported for you.
+
+import torch
+import torch.nn as nn
+
+input_tensor = torch.Tensor([[3, 4, 6, 2, 3, 6, 8, 9]])
+
+# Implement a small neural network for binary classification
+model = nn.Sequential(
+  nn.Linear(8,1),
+  nn.Sigmoid()
+)
+
+output = model(input_tensor)
+print(output)
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+nn.Softmax(-1)
+that takes the input size and returns the same size, but each element is between a number,sums all to 1
+
+input_tensor = torch.tensor([[1.0, -6.0, 2.5, -0.3, 1.2, 0.8]])
+
+# Create a softmax function and apply it on input_tensor
+softmax = nn.Softmax(dim=-1)
+probabilities = softmax(input_tensor)
+print(probabilities)
+
+Backward pass, or backpropagation is used to update weights and biases during training
+--------------------------------------------------------------------------------------------------------------------------------------
+Loss function: Gives feedback to model during training
+loss = F(y, y^), where y^ is predication and y is actual value
+
+import torch.nn.functional as F
+
+F.one_hot(torch.tensor(0), num_classes =3) -> tensor([1,0,0])
+F.one_hot(torch.tensor(1), num_classes = 3) -> tensor([0,1,0])
+F.one_hot(torch.tensor(2), num_classes=3) -> tensor([0,0,1])
+
+
+Cross entropy loss in pytorch
+
+from torch.nn import CrossEntropyLoss
+
+scores = tensor([[-0.1211, 0.2059]])
+one_hot_target = tensor([[1,0]])
+criterion=CrossEntropyLoss()
+criterion(scores.double(), one_hot_target.double())
+
+--------------------------------------------------------------------------------------------------------------------------------------
+ground truth y = 0
+number of classes N = 3
+class 				0 		1		 2
+one hot encoding	1		0		 0
+one_hot_numpy = np.array([1,0,0])
+equals
+F.one_hot(torch.tensor(0), num_classes=3)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+y = 1
+num_classes = 3
+
+# Create the one-hot encoded vector using NumPy
+one_hot_numpy = np.array([0, 1, 0])
+
+# Create the one-hot encoded vector using PyTorch
+one_hot_pytorch = F.one_hot(torch.tensor(1), num_classes)
+--------------------------------------------------------------------------------------------------------------------------------------
+import torch
+import torch.nn.functional as F
+from torch.nn import CrossEntropyLoss
+
+y = [2]
+scores = torch.tensor([[0.1, 6.0, -2.0, 3.2]])
+
+# Create a one-hot encoded vector of the label y
+one_hot_label = F.one_hot(torch.tensor(y), scores.shape[1])
+
+# Create the cross entropy loss function
+criterion = CrossEntropyLoss()
+
+# Calculate the cross entropy loss
+loss = criterion(scores.double(), one_hot_label.double())
+print(loss)
+--------------------------------------------------------------------------------------------------------------------------------------
+#create the model and run a forward pass
+model = nn.Sequential(nn.Linear(16,8),  nnLinear(8,4),nn.Linear(4,2),nn.Softmax(dim=1))
+prediction = model(sample)
+#Calculate the loss and compute the gradients
+criterion = CrossEntropyLoss()
+loss = criterion(prediction, target)
+loss.backward()
+#Access each layer's gradients
+model[0].weight.grad, model[0].bias.grad
+model[1].weight.grad, model[1].bias.grad
+model[2].weight.grad, model[2].bias.grad
+--------------------------------------------------------------------------------------------------------------------------------------
+updating model parameters
+# learning rate is typically small
+lr = 0.001
+
+#update the weights
+weight = model[0].weight
+weight_grad = model[0].weight.grad
+weight = weight - lr*weight_grad
+
+#update the biases
+bias = model[0].bias
+bias_grad = model[0].bias.grad
+bias = bias - lr*bias_grad
+--------------------------------------------------------------------------------------------------------------------------------------
+Gradient descent
+For non-convex functins, we will use an interative process such as gradient descent
+in PyTorch, an optimizer takes care of weightupdates
+The most common optimizer is stochastic gradient descent (SGD)
+
+import torch.optim as optim
+
+#Create the optimizer
+optimizer = optim.SGD(model.parameters(), lr=0.001)
+Optimizer handles updating model parameters (or weights) after calculation of local gradients
+optimizer.step()
+--------------------------------------------------------------------------------------------------------------------------------------
+model = nn.Sequential(nn.Linear(16, 8),
+                      nn.Linear(8, 2)
+                     )
+
+# Access the weight of the first linear layer
+weight_0 = model[0].weight
+
+# Access the bias of the second linear layer
+bias_1 = model[1].bias
+--------------------------------------------------------------------------------------------------------------------------------------
+weight0 = model[0].weight
+weight1 = model[1].weight
+weight2 = model[2].weight
+
+# Access the gradients of the weight of each linear layer
+grads0 = weight0.grad
+grads1 = weight1.grad
+grads2 = weight2.grad
+
+# Update the weights using the learning rate and the gradients
+weight0 = weight0-lr*grads0
+weight1 = weight1-lr*grads1
+weight2 = weight2-lr*grads2
+--------------------------------------------------------------------------------------------------------------------------------------
+Training a neural network
+1. Create a model
+2. Choose a loss function
+3. Create a dataset
+4. Define an optimizer
+5. Run a training loop, where for each sample of the dataset, we repeat:
+a. cacluating loss(forward pass)
+b. calculating local gradients
+c. updating model parameters
+
+Introducing the Mean squared Error Loss(MSE loss) is the squared difference between the prediciton and the ground truth.
+def mean_squared_loss(prediction, target):
+	return np.mean((prediction-target)**2)
+
+in pytorch
+criterion = nn.MSELoss()
+#Predictio and target are float tensors
+loss = criterion(prediction, target)
+
+Before the training loop
+#Create the dataset and dataloader
+dataset = TensorDataset(torch.tensor(features).float(), torch.tensor(target).float())
+dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
+
+#Create the model
+model = nn.Sequential(nn.Linear(4,2), nn.Linear(2,1))
+
+#Create the loss and optimizer
+criterion = nn.MSELoss()
+optimizer = optim.SGD(model.parameters(), lr=0.001)
+
+
+The training loop
+#Loop through the dataset multiple times
+for epoch in range(num_epochs):
+	for data in dataloader:
+		#set the gradients to zero
+		optimizer.zero_grad()
+		#get feature and target from the data loader
+		feature,target= data
+		#Run a forward pass
+		pred = model(feature)
+		# Compute loss and gradients
+		loss = criterion(pred,target)
+		loss.backward()
+		# Update the paramters
+		optimizer.step()
+		
+--------------------------------------------------------------------------------------------------------------------------------------
+y_pred = np.array(10)
+y = np.array(1)
+
+# Calculate the MSELoss using NumPy
+mse_numpy = np.mean((y_pred-y)**2)
+
+# Create the MSELoss function
+criterion = nn.MSELoss()
+
+# Calculate the MSELoss using the created loss function
+mse_pytorch = criterion(torch.tensor(y_pred).float(), torch.tensor(y).float())  -> has to be tensor instead of np array
+# print(mse_pytorch)
