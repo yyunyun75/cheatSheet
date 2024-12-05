@@ -1,0 +1,454 @@
+https://campus.datacamp.com/courses/introduction-to-deep-learning-with-pytorch/introduction-to-pytorch-a-deep-learning-library?ex=1
+
+pip install torch
+
+Activcation function
+Sigmoid functions:
+Bounded between 0 and 1
+can be used anywhere int the netwrork
+
+Gradients:
+Approach zero from low and high values of x
+cause function to saturate
+
+Sigmoid function saturation can lead to vanishing gradients during backpropagation.
+
+New activcation function: ReLU (Rectified Linear Unit)
+f(x) = max(x,0)
+for positive inputs, theoutput is equal to the inputs
+for strictly negativ einputs, the output is equal to zero
+overcomes the vanishing gradients problem
+in PyTorch:
+relu = nn.ReLU()
+
+Leaky ReLU
+For positive inputs, it behaves similarly to ReLU
+For negative inputs, it multiplies the input by a small coefficient(defaulted to 0.01)
+The gradeints for negative inputs are never null
+in PyTorch:
+leaky_relu = nn.LeakyReLU(negative_slope=0.05)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Create a ReLU function with PyTorch
+relu_pytorch = nn.ReLU()
+
+# Apply your ReLU function on x, and calculate gradients
+x = torch.tensor(-1.0, requires_grad=True)
+y = relu_pytorch(x)
+y.backward()
+
+# Print the gradient of the ReLU function for x
+gradient = x.grad
+print(gradient)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+input and output layers dimensions ae fixed
+input layer depends on the number of features n_features
+output layer depends on the number of categories in n_classes
+
+model = nn.Sequential(nn.Linear(n_features,8), nnLinear(8,4), nnLinear(4, n_classes))
+
+We can use as many hidden layers as we want
+increase the number of hidden layers = increase the number of parameters = increasing the model capacity
+
+model = nn.Sequential(nn.Linear(8,4), nn.Linear(4,2))
+Manually calculating the number of parameters:
+first layer has 4 neurons, each neuron has 8+1 parameters = 36 parameters
+second layer has 2 neurons, each neuron has 4+1 parameters = 10 parameters
+toal = 46 learnable parameters
+
+Using PyTorch
+.numel(): retuns the number of elements in the tensor
+
+total = 0
+for parameter in model.parameters():
+	total += parameter.numel()
+print(total)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+n_features = 8
+n_classes = 2
+
+input_tensor = torch.Tensor([[3, 4, 6, 2, 3, 6, 8, 9]])
+
+# Create a neural network with less than 120 parameters
+model = nn.Sequential(nn.Linear(n_features, 4), nn.Linear(4,2), nn.Linear(2,n_classes))
+output = model(input_tensor)
+
+print(calculate_capacity(model))
+
+def calculate_capacity(model):
+  total = 0
+  for p in model.parameters():
+    total += p.numel()
+  return total
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Updating weights with SGD
+Training a neural netwrok = solving an optimziation problem
+Stochastic Gradient Descent (SGD) optimizer
+sgd = optim.SGD(model.parameters(), lr=0.01, momentum=0.95)
+two parameters:
+learning rate: controls the step size, typical value 10-2 and 10-4
+momentum: controls the inertia of the optimizer. The momentum parameter (in this case, momentum=0.95) 
+determines how much of the previous update is retained. A value close to 1 means that a large portion 
+of the previous update is carried over, while a value close to 0 means little to no momentum is used.
+Typical value between 0.85 and 0.99
+
+Bad values can lead to:
+Long training times
+Bad overall performances(poor accuracy)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Layer initialization (1)
+import torch.nn as nn
+layer = nn.Linear(64,128)
+print(layer.weight.min(), layer.weight.max())
+
+(tensor(-0.1250, grad_fn=<MinBackward1>),tensor(0.1250, grad_fn=<MinBackward1>))
+A layer weights are initialized to small values
+The outputs of a ayer would explode if the inputs and weights are not normalized
+The weights can be initialized using different methods(for example, using a uniform distribution)
+
+import torch.nn as nn
+layer = nn.Linear(64,128)
+nn.init.uniform_(layer.weight)
+
+print(custom_layer.fc.weight.min(), customer_layer.fc.weight.max())
+
+(tensor(0.0002, grad_fn=<MinBackward1>),tensor(1.0000, grad_fn=<MinBackward1>))
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Transfer learning and fine turning(1)
+Transfer learning: reusing a model trained on a first ask for a secod similar task, to accelerate the training process
+
+torch.save()
+torch.load()
+
+Fine-tuning = A type of transfer learningsmall learning ratenot every layer is trained
+rule of the thumb: freeze early layers of network and fine tune layers closer to output layer
+
+import torch.nn as nn
+model = nn.Sequential(nn.Linear(64,128), nn.Linear(128,256))
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+for name, param in model.named_parameters():
+	if name == '0.weight':
+		param.requires_grad = False
+		
+for name, param in model.named_parameters():    
+  
+    # Check if the parameters belong to the first layer
+    if name == '0.weight' or name == '0.bias':
+      
+        # Freeze the parameters
+        param.requires_grad = False
+  
+    # Check if the parameters belong to the second layer
+    if name == '1.weight' or name == '1.bias':
+      
+        # Freeze the parameters
+        param.requires_grad = False
+		
+--------------------------------------------------------------------------------------------------------------------------------------------------------------		
+		
+layer0 = nn.Linear(16, 32)
+layer1 = nn.Linear(32, 64)
+
+# Use uniform initialization for layer0 and layer1 weights
+nn.init.uniform_(layer0.weight)
+nn.init.uniform_(layer1.weight)
+
+model = nn.Sequential(layer0, layer1)		
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
+import pandas as pd
+pd.read_csv('animals.csv')
+
+import numpy as np
+#Define input features
+features = animals.iloc[:, 1:-1]
+X= features.to_numpy()
+print(X)
+
+iloc, which is a method in Pandas for integer-location based indexing.
+animals is a Pandas DataFrame, then iloc is used to select rows and columns by their integer index positions
+
+animals.iloc[:, 1:-1]:
+: before the comma means "select all rows."
+1:-1 after the comma means "select all columns starting from the second column up to (but not including) the last column."
+This effectively slices the DataFrame to exclude the first and last columns, selecting all other columns in between.
+
+#Define target features (ground truth)
+target = animals.iloc[:, -1]
+y = target.to_numpy()
+
+this get the last column as array
+
+import torch
+from torch.utils.data import TensorDataset
+
+#Instantiate dataset class
+dataset = TensorDataset(torch.tensor(X).float(), torch.tensor(y).float())
+
+#Access an individual sample
+sample = dataset[0]
+input_sample, label_sample = sample
+print('input sample:', input_sample)   -> tensor([0., 1., 1.,])
+print('label sample:', label_sample)  -> tensor(2.)
+
+from torch.utils.data import DataLoader
+
+batch_size = 2
+shuffle = True
+
+# Create a DataLoader
+dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
+
+#Iterate over the dataloader
+for batch_inputs, btch_labels in dataloader:
+	print('batch inputs', batch_inputs)
+	print('batch labels', batch_labels)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
+import numpy as np
+import torch
+from torch.utils.data import TensorDataset
+
+np_features = np.array(np.random.rand(12, 8))
+np_target = np.array(np.random.rand(12, 1))
+
+torch_features = torch.tensor(np_features)
+torch_target = torch.tensor(np_target)
+
+# Create a TensorDataset from two tensors
+dataset = TensorDataset(torch_features, torch_target)
+
+# Return the last element of this dataset
+print(dataset[-1])
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------	
+# Load the different columns into two PyTorch tensors
+features = torch.tensor(dataframe[['ph', 'Sulfate', 'Conductivity', 'Organic_carbon']].values).float()
+target = torch.tensor(dataframe['Potability'].values).float()
+
+# Create a dataset from the two generated tensors
+dataset = TensorDataset(features, target)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
+# Load the different columns into two PyTorch tensors
+features = torch.tensor(dataframe[['ph', 'Sulfate', 'Conductivity', 'Organic_carbon']].to_numpy()).float()
+target = torch.tensor(dataframe['Potability'].to_numpy()).float()
+
+# Create a dataset from the two generated tensors
+dataset = TensorDataset(features, target)
+
+# Create a dataloader using the above dataset
+dataloader = DataLoader(dataset, batch_size=2, shuffle=True)
+x, y = next(iter(dataloader))
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Load the different columns into two PyTorch tensors
+features = torch.tensor(dataframe[['ph', 'Sulfate', 'Conductivity', 'Organic_carbon']].to_numpy()).float()
+target = torch.tensor(dataframe['Potability'].to_numpy()).float()
+
+# Create a dataset from the two generated tensors
+dataset = TensorDataset(features, target)
+
+# Create a dataloader using the above dataset
+dataloader = DataLoader(dataset, shuffle=True, batch_size=2)
+x, y = next(iter(dataloader))
+
+# Create a model using the nn.Sequential API
+model = nn.Sequential(nn.Linear(features.size(1), 2), nn.Linear(2, 1))
+output = model(features)
+print(output)
+
+Here features.size(), gets the rows and column, 1 means column
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Raw dataset is usually split in three subsets:
+Training 80-90% used to adjust the models' parameters (weights, bias)
+Validation 10-20% uused for hyperparameter tuning(learning rate, momentum)
+Testing 5-10%, only used once to calculate final metrics 
+
+Model evaluation metrics
+Loss: Training, validation
+Accuracy: Training, Validation
+
+Calcuating Trainig loss
+For each epoch:
+1. we sum up the loss for each itneration fo the training set dataloader
+2. at the end of the epoch, we calcualte the mean training loss
+
+training_loss = 0.0
+for i, data in enumerate(trainloader, 0):
+	# Run the forward pass
+	...
+	#Calculate the loss
+	loss = criteriion(ouputs, labels)
+	# calcualte the gradients
+	...
+	#Calculate and sum the loss
+	training_loss += loss.item()
+epoch_loss = training_loss / len(trainloader)
+
+Calculating validation loss
+After the training epoch, we iternate over the validation set and calculate the average validation loss
+validation_loss = 0.0
+model.eval() # put model in evaluation model
+with torch.no_grad(): # Speed up the forward pass
+	for i, data in enumerate(validationloader, 0):
+		# Run the forward pass
+		...
+		# Calculate the loss
+		loss = criterion(outputs, labels)
+		validation_loss += loss.item()
+epoch_loss = validation_loss / len(validationloader)
+
+overfitting occurs when the model stops generalizing and performance on the validation dataset degrades
+training loss low, validation loss high
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Calculating accuracy with torchmetrics
+import torchmetrics
+
+#Create accuracy metric using torch metrics
+metric = torchmetrics.Accuracy(task="multiclass", num_classes=3)
+for i, data in enumerate(dataloader, 0):
+	features, labels = data
+	outputs = model(features)
+	#calculate accuracy over the batch
+	acc = metric(outputs, labels.argmax(dim=-1))
+# Calculate accuracy over the whole epoch
+acc = metric.compute()
+print(f"Accuracy on all data: {acc}")
+#Reset the metric for the next epoch (training for validation)
+metric.reset()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Set the model to evaluation mode
+model.eval()
+validation_loss = 0.0
+
+with torch.no_grad():
+  
+  for data in validationloader:
+    
+      outputs = model(data[0])
+      loss = criterion(outputs, data[1])
+      
+      # Sum the current loss to the validation_loss variable
+      validation_loss += loss.item()
+      
+# Calculate the mean loss value
+validation_loss_epoch = validation_loss / len(validationloader)
+print(validation_loss_epoch)
+
+# Set the model back to training mode
+model.train()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Create accuracy metric using torch metrics
+metric = torchmetrics.Accuracy(task="multiclass", num_classes=3)
+for data in dataloader:
+    features, labels = data
+    outputs = model(features)
+    
+    # Calculate accuracy over the batch
+    acc = metric(outputs, labels.argmax(dim=-1))
+    
+# Calculate accuracy over the whole epoch
+acc = metric.compute()
+
+# Reset the metric for the next epoch 
+metric.reset()
+plot_errors(model, dataloader)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Reasons for overfitting
+overfitting: the model does not generalize to unseen data
+problem 						solutions
+Dataset is not large enough 	Get more data / use dta augmentation
+Model has too much capacity 	Reduce model size / add dropout
+Weights are too large 			Weight decay
+
+Strategies
+Reducing model size or adding dropout layer
+using weight decay to force parameters to reamin small
+obtaining new data or augmenting data
+
+Regularization using a dropout layer
+Randomly zeroes out elemetns of the inptu tensor during training
+
+model = nn.Sequential(nn.Linear(8,4), nn.ReLU(), nn.Dropout(p=0.5)) -> p means probability 50%
+features = torch.randn((1,8))
+model(i)
+
+Dropout is added after the activation function
+behaves differently during training and evaluation;  we must remember to swith modes usig model.train() and model.eval()
+
+Regulariztion with weight decay
+optimizer = optim.SGD(model.parameters(), lr=le-3, weight_decay=1e-4)
+Optimizer's weight_decay parameter takes value between zero and one, typically small value e.g. 1e-3
+Weight decay adds penalty to loss function to discourage large weights and biases
+The higher the paramter, the less likely the model is to overfitting
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+An input_tensor of dimensions 1x 3072  has been created for you.
+using input_tensor as input and a size 16 output.
+ 
+# Create a small neural network
+model = nn.Sequential(nn.Linear(3072,16), nn.ReLU(), nn.Dropout(p=0.8))
+model(input_tensor)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Steps to maximize performance
+Step 1: overfit the training set
+Step 2: Reduce overfitting
+Step 3: Fine tune the hyperparameters
+
+Step 1
+Modify the training loop to overfit a single data point (bath size of 1)
+features, labels = next(iter(trainloader))
+for i in range(1e3):
+	outputs = model(features)
+	loss = critrion(outputs, labels)
+	loss.backward()
+	optimizer.step()
+
+should reach 1.0 accuracy and 0 loss
+helps findings bugs in the code
+
+Goal: minimize the training loss
+Create large enough model
+Use a default learning rate
+
+step 2 reduce overfitting
+Goal: maximize the validation accuracy
+Experiment with:
+Dropout
+Data augmenttion
+Weight decay
+Reducing model capacity
+Keep track of each hyperparameter and report maximum validation accuracy
+
+Step 3 fine tune hyperprameters
+Grid search
+for factor in range(2,6):
+	lr = 10 ** -factor
+	
+Random search
+factor = np.random.uniform(2,6)
+lr = 10 ** -factor
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+values = []
+for idx in range(10):
+    # Randomly sample a learning rate factor between 2 and 4
+    factor = np.random.uniform(2,4)
+    lr = 10 ** -factor
+    
+    # Randomly select a momentum between 0.85 and 0.99
+    momentum = np.random.uniform(0.85,0.99)
+    
+    values.append((lr, momentum))
+	
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
