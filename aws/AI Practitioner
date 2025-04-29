@@ -1,6 +1,8 @@
 what is RLHF
 Reinforcement learning from human Feedback
+
 RLHF Process
-Step1 Supervised Fine-Tuning
-Step2 Training a Reward Model
-Step 3 Optimize Policy
+Data Collection: Set of human-generated prompts and responses are created
+Step1 Supervised Fine-Tuning: fine-tune an existing model with internal knowledge, then the model creates responses for the human generated promopts, responses are mathematically compared to human-generated answers
+Step2 Training a Reward Model: humans can indicate which response they prefer from the ame prompt, the reward model can now estimate how a human would prefer a prompt response
+Step 3 Optimize Policy: use the reward model as a reward function for RL, this part can be fully automated
