@@ -6,3 +6,9 @@ Data Collection: Set of human-generated prompts and responses are created
 Step1 Supervised Fine-Tuning: fine-tune an existing model with internal knowledge, then the model creates responses for the human generated promopts, responses are mathematically compared to human-generated answers
 Step2 Training a Reward Model: humans can indicate which response they prefer from the ame prompt, the reward model can now estimate how a human would prefer a prompt response
 Step 3 Optimize Policy: use the reward model as a reward function for RL, this part can be fully automated
+
+Model Fit
+in case your model has poor performance, you need to look at its fits
+overfittting: performs well on the training data, doesn't perform well on evaluation data
+underfitting: model performs poorly on training data, could be a problem of having a model too simple or poor data features
+Balanced: Neither overfitting or underfitting
