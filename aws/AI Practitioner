@@ -14,6 +14,9 @@ underfitting: model performs poorly on training data, could be a problem of havi
 Balanced: Neither overfitting or underfitting
 
 Bias and Variance
-Bias: Difference or error between predicted and actual value, occurs due to the wrong choice i the ml process
+Bias: Difference or error between predicted and actual value, occurs due to the wrong choice in the ml process
 High Bias: the model doesn't closely match the training data, example: inear regression function on a non-linear dataset, considered as underfitting
 Reducign the Bias: Use a more complex model, increase the number of features
+
+Variance: How much the perforamnce of a model changes if trained on a different dataset which has a similar distribution
+High Variance: Model is very sensitive to changes in the training data, this is the case when overfitting: performs well on training data, but poorly on unseen test data
