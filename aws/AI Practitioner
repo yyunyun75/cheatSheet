@@ -1,2 +1,6 @@
 what is RLHF
 Reinforcement learning from human Feedback
+RLHF Process
+Step1 Supervised Fine-Tuning
+Step2 Training a Reward Model
+Step 3 Optimize Policy
