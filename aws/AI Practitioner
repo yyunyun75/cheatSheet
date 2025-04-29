@@ -12,3 +12,8 @@ in case your model has poor performance, you need to look at its fits
 overfittting: performs well on the training data, doesn't perform well on evaluation data
 underfitting: model performs poorly on training data, could be a problem of having a model too simple or poor data features
 Balanced: Neither overfitting or underfitting
+
+Bias and Variance
+Bias: Difference or error between predicted and actual value, occurs due to the wrong choice i the ml process
+High Bias: the model doesn't closely match the training data, example: inear regression function on a non-linear dataset, considered as underfitting
+Reducign the Bias: Use a more complex model, increase the number of features
