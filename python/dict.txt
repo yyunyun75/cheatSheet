@@ -15,7 +15,7 @@ europe = {'spain':'madrid', 'france':'paris', 'germany':'berlin', 'norway':'oslo
 europe['italy'] = 'rome'
 
 # Print out italy in europe
-print(europe['italy'])
+print('italy' in europe)
 
 # Add poland to europe
 europe['poland'] = 'warsaw'
