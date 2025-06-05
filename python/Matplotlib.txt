@@ -1,2 +1,15 @@
 Python basics cheat sheet
 https://media.datacamp.com/legacy/image/upload/v1694526244/Marketing/Blog/Python_Basics_Cheat_Sheet-updated.pdf
+
+# Print the last item from year and pop
+print(year[-1], pop[-1])
+
+
+# Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+
+# Make a line plot: year on the x-axis, pop on the y-axis
+plt.plot(year,pop)
+
+# Display the plot with plt.show()
+plt.show()
