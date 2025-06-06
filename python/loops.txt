@@ -37,3 +37,8 @@ for v in np_height:
 for v in np.nditer(np_baseball):
     print(v)
 ------------------------------------------------------
+import pandas as pd
+brics = pd.read_csv("brics.csv", index_col=0)
+brics["name_length"] = brics["country"].apply(len)
+print(brics)
+------------------------------------------------------
