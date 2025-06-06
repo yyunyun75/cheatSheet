@@ -42,3 +42,12 @@ brics = pd.read_csv("brics.csv", index_col=0)
 brics["name_length"] = brics["country"].apply(len)
 print(brics)
 ------------------------------------------------------
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Iterate over rows of cars
+for label, row in cars.iterrows():
+    print(label)
+    print(row)
+------------------------------------------------------
