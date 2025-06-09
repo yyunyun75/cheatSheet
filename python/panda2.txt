@@ -1,1 +1,1 @@
-
+print(dataFrame.head()) //print first few rows
