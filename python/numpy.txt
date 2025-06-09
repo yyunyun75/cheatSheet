@@ -198,7 +198,7 @@ plt.show()
 plt.clf()
 
 # Transpose np_aw: np_aw_t
-np_aw_t = np.transpose(np_aw)
+np_aw_t = np.transpose(np_aw) (change something like: np.array([[1, 2, 3],[4, 5, 6]]) -> [[1, 4],[2, 5],[3, 6]])
 
 # Plot np_aw_t and show
 plt.plot(np_aw_t)
