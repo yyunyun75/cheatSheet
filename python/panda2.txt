@@ -20,3 +20,8 @@ homelessness_ind = homelessness.sort_values("individuals")
 
 # Print the top few rows
 print(homelessness_ind.head())
+
+# Sort homelessness by descending family members
+homelessness_fam = homelessness.sort_values(by='family_members', ascending=False)
+
+print(homelessness_fam.head())
