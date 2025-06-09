@@ -36,3 +36,8 @@ print(homelessness_reg_fam.head())
 individuals = homelessness['individuals']
 
 print(individuals.head())
+
+# Select the state and family_members columns, multiple columns usage is slightly different extra []
+state_fam = homelessness[['state', 'family_members']]
+
+print(state_fam.head())
