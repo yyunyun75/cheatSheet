@@ -151,3 +151,19 @@ unique_dogs = vet_visits.drop_duplicates(subset=["name", "breed"])
 unique_dogs["breed"].value_counts() //count by breed
 unique_dogs["breed"].value_counts(sort=True) //count and sort desc
 unique_dogs["breed"].value_counts(normalize=True) //proportions
+
+# Count the number of stores of each type
+store_counts = store_types["type"].value_counts()
+print(store_counts)
+
+# Get the proportion of stores of each type
+store_props = store_types["type"].value_counts(normalize=True)
+print(store_props)
+
+# Count the number of stores for each department and sort
+dept_counts_sorted = store_types["department"].value_counts(sort=True)
+print(dept_counts_sorted)
+
+# Get the proportion of stores in each department and sort
+dept_props_sorted = store_types["department"].value_counts(sort=True, normalize=True)
+print(dept_props_sorted)
