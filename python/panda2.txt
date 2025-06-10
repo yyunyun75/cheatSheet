@@ -119,3 +119,6 @@ print(sales["temperature_c"].agg(iqr))
 
 # Update to print IQR of temperature_c, fuel_price_usd_per_l, & unemployment
 print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg(iqr))
+
+# Update to print IQR and median of temperature_c, fuel_price_usd_per_l, & unemployment
+print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr, np.median]))
