@@ -32,6 +32,7 @@ homelessness_reg_fam = homelessness.sort_values(by=['region', 'family_members'],
 # Print the top few rows
 print(homelessness_reg_fam.head())
 
+dogs.groupby("color")["weight_kg"].agg([min, max, sum])
 # Select the individuals column
 individuals = homelessness['individuals']
 
