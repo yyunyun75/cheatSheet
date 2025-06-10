@@ -216,7 +216,7 @@ print(sales_by_type_is_holiday)
 import numpy as np
 
 # For each store type, aggregate weekly_sales: get min, max, mean, and median
-sales_stats = sales.groupby("weekly_sales")["weekly_sales"].agg([min, max, "mean", "median"])
+sales_stats = sales.groupby("type")["weekly_sales"].agg([min, max, "mean", "median"])
 
 # Print sales_stats
 print(sales_stats)
