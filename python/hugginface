@@ -1,12 +1,12 @@
 github: https://github.com/huggingface/huggingface_hub
 huggingface: https://huggingface.co/models
-
+-----------------------------------------------------------------
 from huggingface_hub import HfApi
 
 api = HfApi()
 models = list(api.list_models(limit=3))
 print(models)
-
+-----------------------------------------------------------------
 from transformers import pipeline
 
 my_pipeline = pipeline(
