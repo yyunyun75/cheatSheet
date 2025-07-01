@@ -10,6 +10,8 @@ print(models)
 from transformers import pipeline
 
 my_pipeline = pipeline(
-    "text-classification",
-    model="distilbert-base-uncased-finetuned-sst-2-english"
+    "text-classification", //task
+    model="distilbert-base-uncased-finetuned-sst-2-english" //model
 )
+
+print(my_pipeline("Datacamp is awesome!"))
